@@ -43,8 +43,8 @@ class App(customtkinter.CTk):
         self.frame_left.grid_rowconfigure(11, minsize=10)  # empty row with minsize as spacing
 
         self.label_1 = customtkinter.CTkLabel(master=self.frame_left,
-                                              text="ClickerCounter",
-                                              text_font=("Roboto Medium", -16))  # font name and size in px
+                                              text="ClickerCounter")
+                                              #text_font=("Roboto Medium", -16))  # font name and size in px
         self.label_1.grid(row=1, column=0, pady=10, padx=10)
 
         self.button_1 = customtkinter.CTkButton(master=self.frame_left,
@@ -108,51 +108,6 @@ class App(customtkinter.CTk):
                                                         text="CTkRadioButton Group:")
         self.label_radio_group.grid(row=0, column=2, columnspan=1, pady=20, padx=10, sticky="")
 
-        #self.radio_button_1 = customtkinter.CTkRadioButton(master=self.frame_right,
-        #                                                  variable=self.radio_var,
-        #                                                   value=0)
-        #self.radio_button_1.grid(row=1, column=2, pady=10, padx=20, sticky="n")
-
-        #self.radio_button_2 = customtkinter.CTkRadioButton(master=self.frame_right,
-        #                                                   variable=self.radio_var,
-        #                                                   value=1)
-        #self.radio_button_2.grid(row=2, column=2, pady=10, padx=20, sticky="n")
-
-        #self.radio_button_3 = customtkinter.CTkRadioButton(master=self.frame_right,
-        #                                                   variable=self.radio_var,
-        #                                                   value=2)
-        #self.radio_button_3.grid(row=3, column=2, pady=10, padx=20, sticky="n")
-
-        #self.slider_1 = customtkinter.CTkSlider(master=self.frame_right,
-        #                                        from_=0,
-        #                                        to=1,
-        #                                        number_of_steps=3,
-        #                                        command=self.progressbar.set)
-        #self.slider_1.grid(row=4, column=0, columnspan=2, pady=10, padx=20, sticky="we")
-
-        #self.slider_2 = customtkinter.CTkSlider(master=self.frame_right,
-        #                                        command=self.progressbar.set)
-        #self.slider_2.grid(row=5, column=0, columnspan=2, pady=10, padx=20, sticky="we")
-
-        #self.switch_1 = customtkinter.CTkSwitch(master=self.frame_right,
-        #                                        text="CTkSwitch")
-       # self.switch_1.grid(row=4, column=2, columnspan=1, pady=10, padx=20, sticky="we")
-
-        #self.switch_2 = customtkinter.CTkSwitch(master=self.frame_right,
-        #                                        text="CTkSwitch")
-        #self.switch_2.grid(row=5, column=2, columnspan=1, pady=10, padx=20, sticky="we")
-
-        #self.combobox_1 = customtkinter.CTkComboBox(master=self.frame_right,
-          #                                          values=["Value 1", "Value 2"])
-        #self.combobox_1.grid(row=6, column=2, columnspan=1, pady=10, padx=20, sticky="we")
-
-        #self.check_box_1 = customtkinter.CTkCheckBox(master=self.frame_right,
-        #                                             text="CTkCheckBox")
-        #self.check_box_1.grid(row=6, column=0, pady=10, padx=20, sticky="w")
-
-        #self.check_box_2 = customtkinter.CTkCheckBox(master=self.frame_right,
-        #                                             text="CTkCheckBox")
-       # self.check_box_2.grid(row=6, column=1, pady=10, padx=20, sticky="w")
         # Eingabe unten
         self.entry = customtkinter.CTkEntry(master=self.frame_right,
                                             width=120,
@@ -166,20 +121,7 @@ class App(customtkinter.CTk):
                                                 command=self.button_event)
         self.button_5.grid(row=8, column=2, columnspan=1, pady=20, padx=20, sticky="we")
 
-        #set default values
-        '''
-        self.optionmenu_1.set("Dark")
-        self.button_3.configure(state="disabled", text="Disabled CTkButton")
-        self.combobox_1.set("CTkCombobox")
-        self.radio_button_1.select()
-        self.slider_1.set(0.2)
-        self.slider_2.set(0.7)
-        self.progressbar.set(0.5)
-        self.switch_2.select()
-        self.radio_button_3.configure(state=tkinter.DISABLED)
-        self.check_box_1.configure(state=tkinter.DISABLED, text="CheckBox disabled")
-        self.check_box_2.select()
-'''
+
     def button_event(self):
         print("Button pressed")
 
