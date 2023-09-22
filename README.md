@@ -23,6 +23,7 @@ Maus
 - Teilenr
 - kaufdatum
 - Links klick summe
+- mittelklick Summe
 - rechts klick summe
 - Sessions insgesamt = letzte Session_ID
 - 
