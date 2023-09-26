@@ -1,5 +1,5 @@
 # ClickCounter
-
+- on press farbe ändern
 - Counter pro Tag speichern
 - Datenbank beschreiben pro Tag -> (Webserver() auslesen und Graph erstellen
 - mehrere Mäuse(CRUD) 
@@ -9,6 +9,7 @@
 - Summe aller klicks anzeigne in GUI
 - Gui schöner machen
 - Hintergrund ausführbar machen
+- maybe spielzeit (neu, stop, start, ende)
 
 Graph
 - Sessions

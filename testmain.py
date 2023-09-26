@@ -2,16 +2,10 @@ import tkinter
 import tkinter.messagebox
 import customtkinter
 import mouse
-import time
 
 customtkinter.set_appearance_mode("System")  # Modes: "System" (standard), "Dark", "Light"
 customtkinter.set_default_color_theme("blue")  # Themes: "blue" (standard), "green", "dark-blue"
 
-rightclickamount = 0
-leftclickamount = 0
-middleclickamount = 0
-is_running = False
-elapsed_time = 129600
 
 class App(customtkinter.CTk):
 
@@ -69,105 +63,36 @@ class App(customtkinter.CTk):
 
         self.frame_right = customtkinter.CTkFrame(master=self, width=340, height=540)
         self.frame_right.grid_propagate(False)  # damit bleibt der Frame immer gleich groß
-        self.frame_right.grid(row=0, column=2,  padx=20, pady=20)
-        #TOP
-        frame_right_mid_width = 340
-        frame_right_mid_height = 40
-
-        self.frame_right_top = customtkinter.CTkFrame(master=self.frame_right, width=frame_right_mid_width, height=frame_right_mid_height, bg_color="white")
-        self.frame_right_top.grid_propagate(False)  # damit bleibt der Frame immer gleich groß
-        self.frame_right_top.grid(row=0, column=0)
-
-        self.button_mauswahl = customtkinter.CTkButton(master=self.frame_right_top,
+        self.frame_right.grid(row=0, column=1,  padx=20, pady=20)
+        self.button_mauswahl = customtkinter.CTkButton(master=self.frame_right,
                                                 text="Mausauswahl",
                                                 command=self.button_event,
-                                                height=25, width=(frame_right_mid_width / 3)
+                                                height=4, width=8
                                                 )
         self.button_mauswahl.grid(row=0, column=0, pady=10, padx=20)
 
-        #MittelKlick - Zähler
-        self.frame_right_mid = customtkinter.CTkFrame(master=self.frame_right, width=frame_right_mid_width, height=frame_right_mid_height, bg_color="white")
-        self.frame_right_mid.grid_propagate(False)  # damit bleibt der Frame immer gleich groß
-        self.frame_right_mid.grid(row=2, column=0)
-        self.label_mittelklickCounter = customtkinter.CTkLabel(master=self.frame_right_mid, text="0.000.000.000",width=150,bg_color="blue")
-        self.label_mittelklickCounter.place(x=frame_right_mid_width / 2, y=frame_right_mid_height / 2, anchor="center")
+        self.label_mittelklick = customtkinter.CTkLabel(master=self.frame_right,
+                                              text="Mitte")
+        # text_font=("Roboto Medium", -16))  # font name and size in px
+        self.label_mittelklick.grid(row=2, column=0, pady=10, padx=10)
 
+        self.label_linkssklick = customtkinter.CTkLabel(master=self.frame_right,
+                                                        text="Links")
+        # text_font=("Roboto Medium", -16))  # font name and size in px
+        self.label_linkssklick.grid(row=3, column=0, pady=10, padx=10)
 
-        #ClickZähler
-        self.frame_right_clickCounter = customtkinter.CTkFrame(master=self.frame_right, width=frame_right_mid_width,
-                                                      height=frame_right_mid_height, bg_color="white")
-        self.frame_right_clickCounter.grid_propagate(False)  # damit bleibt der Frame immer gleich groß
-        self.frame_right_clickCounter.grid(row=3, column=0)
+        self.label_rechtsklick = customtkinter.CTkLabel(master=self.frame_right,
+                                                        text="Rechts")
+        # text_font=("Roboto Medium", -16))  # font name and size in px
+        self.label_rechtsklick.grid(row=4, column=0, pady=10, padx=10)
 
-        self.label_linkssklickCounter = customtkinter.CTkLabel(master=self.frame_right_clickCounter, text="0.000.000.000", width=150, bg_color="blue")
-        self.label_linkssklickCounter.grid(row=4, column=0, pady=10, padx=10)
-
-        self.label_rechtsklickCounter = customtkinter.CTkLabel(master=self.frame_right_clickCounter, text="0.000.000.000", width=150, bg_color="blue")
-        self.label_rechtsklickCounter.grid(row=4, column=1, pady=10, padx=10)
+        global leftclickamount
 
         mouse.on_click(self.onleftclick)
         mouse.on_right_click(self.onrightclick)
         mouse.on_middle_click(self.onmiddleclick)
 
-        # Session Label
-        self.frame_right_session_top = customtkinter.CTkFrame(master=self.frame_right, width=frame_right_mid_width , height=40, bg_color="white")
-        self.frame_right_session_top.grid_propagate(False)  # damit bleibt der Frame immer gleich groß
 
-        self.frame_right_session_top.grid(row=5, column=0)
-        self.frame_right.grid_rowconfigure(4, weight=1)
-        self.label_session = customtkinter.CTkLabel(master=self.frame_right_session_top, text="Session",
-                                                    width=150, bg_color="blue")
-        self.label_session.place( x=frame_right_mid_width / 2, y=frame_right_mid_height / 2, anchor="center")
-
-        #session Neu
-        self.frame_right_session_bot = customtkinter.CTkFrame(master=self.frame_right, width=frame_right_mid_width, bg_color="white")
-        self.frame_right_session_bot.grid_propagate(False)  # damit bleibt der Frame immer gleich groß
-
-        self.frame_right_session_bot.grid(row=6, column=0)
-
-        self.button_session_new = customtkinter.CTkButton(master=self.frame_right_session_bot,
-                                                       text="Neu",
-                                                       command=self.button_event,
-                                                       width=150
-                                                       )
-        self.button_session_new.grid(row=0, column=0, pady=10, padx=10)
-
-        #session start/stop
-        self.button_session_start = customtkinter.CTkButton(master=self.frame_right_session_bot,
-                                                       text="Start",
-                                                       command=self.start_timer,
-                                                       width=150
-                                                       )
-        self.button_session_start.grid(row=1, column=0, pady=10, padx=10)
-        self.button_session_stop = customtkinter.CTkButton(master=self.frame_right_session_bot,
-                                                       text="Stop",
-                                                       command=self.stop_timer,
-                                                       width=150
-                                                       )
-        self.button_session_stop.grid(row=1, column=1, pady=10, padx=10)
-
-        #session timestamp Start
-
-        self.label_session_start_time = customtkinter.CTkLabel(master=self.frame_right_session_bot, text="Session Start:",
-                                                    width=150, bg_color="blue")
-        self.label_session_start_time.grid(row=2, column=0, pady=(10,0))
-
-        self.label_session_start_timestamp = customtkinter.CTkLabel(master=self.frame_right_session_bot,
-                                                               text="00:00:00:00",
-                                                               width=150, bg_color="blue")
-        self.label_session_start_timestamp.grid(row=3, column=0, pady=0)
-
-        # session Laufzeit
-
-        self.label_session_running_time = customtkinter.CTkLabel(master=self.frame_right_session_bot,
-                                                               text="Laufzeit",
-                                                               width=150, bg_color="blue")
-        self.label_session_running_time.grid(row=2, column=1, pady=(10, 0))
-
-        self.label_session_running_timestamp = customtkinter.CTkLabel(master=self.frame_right_session_bot,
-                                                                    text="00:00:00:00",
-                                                                    width=150, bg_color="blue")
-        self.label_session_running_timestamp.grid(row=3, column=1, pady=0)
 
         '''
         # configure grid layout (2x1)
@@ -253,51 +178,21 @@ class App(customtkinter.CTk):
     def on_closing(self, event=0):
         self.destroy()
 
-
-
-
     def onrightclick(self):
-        global rightclickamount
         rightclickamount += 1
         print("right: " + str(rightclickamount))
-        self.label_rechtsklickCounter.configure(text=f'Rightclicked: {rightclickamount} times!!!')
+        self.label_rechtsklick.configure(text=f'Rightclicked: {rightclickamount} times!!!')
 
     def onleftclick(self):
-        global leftclickamount
         leftclickamount += 1
         print("left: " + str(leftclickamount))
-        self.label_linkssklickCounter.configure(text=f'1.000.000.00{leftclickamount}')
+        self.label_linkssklick.configure(text=f'Leftclicked: {leftclickamount} times!!!')
 
     def onmiddleclick(self):
-        global middleclickamount
         middleclickamount += 1
         print("left: " + str(middleclickamount))
+        self.label_mittelklick.configure(text=f'middleclick: {middleclickamount} times!!!')
 
-        self.label_mittelklickCounter.configure(text=f'middleclick: {middleclickamount} times!!!')
-
-    def update_time(self): #TODO Tage auch anzeigen lassen?
-        if is_running:
-            print("test")
-            global elapsed_time
-            elapsed_time += 1
-            hours = elapsed_time // 3600
-            hours = hours % 24
-            minutes = elapsed_time // 60
-            minutes = minutes % 60
-            seconds = elapsed_time % 60
-
-            time_str = f"{hours:02d}:{minutes:02d}:{seconds:02d}"
-            self.label_session_running_timestamp.configure(text=time_str)
-            app.after(1000, self.update_time)
-
-    def start_timer(self):
-        global is_running
-        is_running = True
-        self.update_time()
-
-    def stop_timer(self):
-        global is_running
-        is_running = False
 
 if __name__ == "__main__":
 
