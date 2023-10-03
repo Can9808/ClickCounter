@@ -18,13 +18,12 @@ session_started = False
 
 class App(customtkinter.CTk):
 
-    WIDTH = 520
-    HEIGHT = 580
-
 
 
 
     def __init__(self):
+        farbe_label = "grey30"
+
         super().__init__()
         self.title("ClickerCounter")
        # self.geometry(f"{App.WIDTH}x{App.HEIGHT}")
@@ -93,7 +92,7 @@ class App(customtkinter.CTk):
         self.frame_right_mid.grid_propagate(False)  # damit bleibt der Frame immer gleich groß
         self.frame_right_mid.grid(row=2, column=0)
         self.label_mittelklickCounter = customtkinter.CTkLabel(master=self.frame_right_mid, text="0",width=150,
-                                                                fg_color=("#3B8ED0", "#1F6AA5"),
+                                                                fg_color=farbe_label,
                                                                 corner_radius=900)
         self.label_mittelklickCounter.place(x=frame_right_mid_width / 2, y=frame_right_mid_height / 2, anchor="center")
 
@@ -105,12 +104,12 @@ class App(customtkinter.CTk):
         self.frame_right_clickCounter.grid(row=3, column=0)
 
         self.label_linkssklickCounter = customtkinter.CTkLabel(master=self.frame_right_clickCounter, text="0", width=150,
-                                                                fg_color=("#3B8ED0", "#1F6AA5"),
+                                                                fg_color=farbe_label,
                                                                 corner_radius=900)
         self.label_linkssklickCounter.grid(row=4, column=0, pady=10, padx=10)
 
         self.label_rechtsklickCounter = customtkinter.CTkLabel(master=self.frame_right_clickCounter, text="0", width=150,
-                                                                fg_color=("#3B8ED0", "#1F6AA5"),
+                                                                fg_color=farbe_label,
                                                                 corner_radius=900)
         self.label_rechtsklickCounter.grid(row=4, column=1, pady=10, padx=10)
 
@@ -126,7 +125,7 @@ class App(customtkinter.CTk):
         self.frame_right.grid_rowconfigure(4, weight=1)
         self.label_session = customtkinter.CTkLabel(master=self.frame_right_session_top, text="Session",
                                                                 width=150,
-                                                                fg_color=("#3B8ED0", "#1F6AA5"),
+                                                                fg_color=farbe_label, #TODO IDK welche Farbe
                                                                 corner_radius=900)
         self.label_session.place( x=frame_right_mid_width / 2, y=frame_right_mid_height / 2, anchor="center")
 
@@ -178,7 +177,7 @@ class App(customtkinter.CTk):
         self.label_session_start_timestamp = customtkinter.CTkLabel(master=self.frame_right_session_bot,
                                                                 text="DD/HH/YY HH:MM:SS",
                                                                 width=150,
-                                                                fg_color=("#3B8ED0", "#1F6AA5"),
+                                                                fg_color=farbe_label,
                                                                 corner_radius=900)
         self.label_session_start_timestamp.grid(row=3, column=0, pady=0)
 
@@ -192,7 +191,7 @@ class App(customtkinter.CTk):
         self.label_session_running_timestamp = customtkinter.CTkLabel(master=self.frame_right_session_bot,
                                                                 text="00:00:00:00",
                                                                 width=150,
-                                                                fg_color=("#3B8ED0", "#1F6AA5"),
+                                                                fg_color=farbe_label,
                                                                 corner_radius=900)
         self.label_session_running_timestamp.grid(row=3, column=1, pady=0)
 
