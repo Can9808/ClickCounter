@@ -262,11 +262,14 @@ class App(customtkinter.CTk):
 
 
     def session_new(self):
+        global session_started
+        global elapsed_time
         if is_running:
             self.show_warning("Stoppe den Timer!")
         else:
-            global session_started
-            global elapsed_time
+            print(elapsed_time)
+            if elapsed_time != 0:
+                print("speichere...")
             elapsed_time = 0
             global rightclickamount
             rightclickamount = 0
@@ -284,8 +287,9 @@ class App(customtkinter.CTk):
             print("date and time =", dt_string)
             self.label_session_start_timestamp.configure(text=dt_string)
 
+
     def safe_data(self):
-        if session_started and not is_running:
+        if session_started and not is_running and elapsed_time != 0:
             print("speichere...")
         elif not session_started:
             self.show_warning("Starte zuerst eine Session!")
