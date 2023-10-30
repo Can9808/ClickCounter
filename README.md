@@ -1,6 +1,6 @@
 # ClickCounter
 - on press farbe ändern
-- Counter pro Tag speichern
+- Counter pro Session speichern
 - Datenbank beschreiben pro Tag -> (Webserver() auslesen und Graph erstellen
 - mehrere Mäuse(CRUD) 
 - Delete -> sind sie Sicher, dass die Maus gelöscht werden soll?
@@ -10,6 +10,12 @@
 - Gui schöner machen
 - Hintergrund ausführbar machen
 - maybe spielzeit (neu, stop, start, ende)
+
+Button
+Neu
+-> neue Session
+- erneuter druck = neue session, speichere NUR wenn Laufzeit != NULL
+-
 
 Graph
 - Sessions
