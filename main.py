@@ -17,10 +17,6 @@ elapsed_time = 0
 session_started = False
 
 class App(customtkinter.CTk):
-
-
-
-
     def __init__(self):
         farbe_label = "grey30"
 
@@ -44,7 +40,7 @@ class App(customtkinter.CTk):
 
         self.button_1 = customtkinter.CTkButton(master=self.frame_left,
                                                 text="Klickzähler",
-                                                command=self.button_event,
+                                                command=self.switch_frame_to_clickcounter,
                                                 width=100
                                                 )
         self.button_1.grid(row=1, column=0, pady=10, padx=20)
@@ -57,7 +53,7 @@ class App(customtkinter.CTk):
         self.button_2.grid(row=2, column=0, pady=10, padx=20)
         self.button_3 = customtkinter.CTkButton(master=self.frame_left,
                                                 text="Mäuse",
-                                                command=self.button_event,
+                                                command=self.switch_frame_to_mouse,
                                                 width=100
                                                 )
         self.button_3.grid(row=3, column=0, pady=10, padx=20)
@@ -68,10 +64,20 @@ class App(customtkinter.CTk):
                                                 )
         self.button_4.grid(row=5, column=0, pady=10, padx=20)
 
+        self.frame_right_mouse = customtkinter.CTkFrame(master=self, width=340, height=540)
+        self.frame_right_mouse.grid_propagate(False)  # damit bleibt der Frame immer gleich groß
+        self.frame_right_mouse.grid(row=0, column=2, padx=20, pady=20)
+
 
         self.frame_right = customtkinter.CTkFrame(master=self, width=340, height=540)
         self.frame_right.grid_propagate(False)  # damit bleibt der Frame immer gleich groß
         self.frame_right.grid(row=0, column=2,  padx=20, pady=20)
+
+
+        self.label_new = customtkinter.CTkLabel(master=self.frame_right_mouse, text="HELLO WORLD!")
+        self.label_new.place(x=340 / 2, y=40 / 2, anchor="center")
+
+
         #TOP
         frame_right_mid_width = 340
         frame_right_mid_height = 40
@@ -195,6 +201,17 @@ class App(customtkinter.CTk):
                                                                 corner_radius=900)
         self.label_session_running_timestamp.grid(row=3, column=1, pady=0)
 
+
+    def switch_frame_to_clickcounter(self):
+        print("Klickzähler")
+        self.frame_right_mouse.grid_remove()
+        self.frame_right.grid(row=0, column=2, padx=20, pady=20)
+
+    def switch_frame_to_mouse(self):
+        print("Mäuse")
+        #self.frame_right.forget()
+        self.frame_right.grid_remove()
+        self.frame_right_mouse.grid(row=0, column=2, padx=20, pady=20)
 
     def button_event(self):
         print("Button pressed")
